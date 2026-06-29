@@ -1,13 +1,37 @@
 import Image from "next/image";
 
-export default function ClientsSection() {
-  const logos = [
-    { src: "/uploads/2026/05/image-21-Vectorized-2.png", alt: "Eucerin Logo", width: "w-28 sm:w-32 md:w-36" },
-    { src: "/uploads/2026/05/image-22-Vectorized-2.png", alt: "AMMT Logo", width: "w-16 sm:w-20 md:w-24" },
-    { src: "/uploads/2026/05/image-23-Vectorized-2.png", alt: "Audi Logo", width: "w-24 sm:w-28 md:w-32" },
-    { src: "/uploads/2026/05/image-24-Vectorized-1.png", alt: "Casio Logo", width: "w-28 sm:w-32 md:w-36" },
-    { src: "/uploads/2026/05/Vector.png", alt: "DHL Logo", width: "w-28 sm:w-32 md:w-36" },
+interface ClientLogo {
+  src: string;
+  alt: string;
+}
+
+interface ClientsSectionProps {
+  data?: {
+    title: string;
+    description: string;
+    logos: ClientLogo[];
+  };
+}
+
+export default function ClientsSection({ data }: ClientsSectionProps) {
+  const title = data?.title || "Our Clients";
+  const description = data?.description || "Our clients include leading global brands who trust us to deliver refined, high-quality environments that elevate their presence and reflect their identity with excellence.";
+  const logos = data?.logos || [
+    { src: "/uploads/2026/05/image-21-Vectorized-2.png", alt: "Eucerin Logo" },
+    { src: "/uploads/2026/05/image-22-Vectorized-2.png", alt: "AMMT Logo" },
+    { src: "/uploads/2026/05/image-23-Vectorized-2.png", alt: "Audi Logo" },
+    { src: "/uploads/2026/05/image-24-Vectorized-1.png", alt: "Casio Logo" },
+    { src: "/uploads/2026/05/Vector.png", alt: "DHL Logo" },
   ];
+
+  const getLogoWidth = (src: string) => {
+    if (src.includes("image-21-Vectorized-2") || src.includes("Eucerin")) return "w-28 sm:w-32 md:w-36";
+    if (src.includes("image-22-Vectorized-2") || src.includes("AMMT")) return "w-16 sm:w-20 md:w-24";
+    if (src.includes("image-23-Vectorized-2") || src.includes("Audi")) return "w-24 sm:w-28 md:w-32";
+    if (src.includes("image-24-Vectorized-1") || src.includes("Casio")) return "w-28 sm:w-32 md:w-36";
+    if (src.includes("Vector.png") || src.includes("DHL")) return "w-28 sm:w-32 md:w-36";
+    return "w-24 sm:w-28 md:w-32"; // standard default size
+  };
 
   return (
     <section className="relative w-full bg-white py-16 sm:py-24 px-6 sm:px-10 md:px-14 lg:px-16 flex flex-col items-center justify-center overflow-hidden">
@@ -16,10 +40,10 @@ export default function ClientsSection() {
         {/* Title & Description */}
         <div className="flex flex-col items-center gap-4 max-w-3xl">
           <h2 className="font-ivymode font-normal text-3xl sm:text-4xl md:text-5xl text-[#563320] leading-tight select-none">
-            Our Clients
+            {title}
           </h2>
           <p className="font-ivymode text-xs sm:text-sm md:text-base text-[#563320]/80 leading-relaxed tracking-wide max-w-2xl">
-            Our clients include leading global brands who trust us to deliver refined, high-quality environments that elevate their presence and reflect their identity with excellence.
+            {description}
           </p>
         </div>
 
@@ -28,7 +52,7 @@ export default function ClientsSection() {
           {logos.map((logo, index) => (
             <div 
               key={index} 
-              className={`relative h-10 sm:h-12 md:h-14 ${logo.width} flex items-center justify-center filter brightness-90 sepia-[0.1] contrast-[0.9] hover:brightness-[0.7] transition-all duration-300`}
+              className={`relative h-10 sm:h-12 md:h-14 ${getLogoWidth(logo.src)} flex items-center justify-center filter brightness-90 sepia-[0.1] contrast-[0.9] hover:brightness-[0.7] transition-all duration-300`}
             >
               <Image
                 src={logo.src}

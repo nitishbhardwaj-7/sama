@@ -1,4 +1,5 @@
 import Image from "next/image";
+import Link from "next/link";
 
 export default function Footer() {
   return (
@@ -49,11 +50,11 @@ export default function Footer() {
           {/* Middle Column: Nav Links */}
           <div className="flex items-center justify-center w-full lg:w-[40%] py-4 lg:py-8">
             <nav className="flex flex-wrap items-center justify-center gap-6 sm:gap-8 font-ivymode text-xs sm:text-sm text-white uppercase tracking-widest">
-              <a href="/" className="hover:text-white/80 transition-colors duration-300">Home</a>
-              <a href="#about" className="hover:text-white/80 transition-colors duration-300">About Us</a>
-              <a href="#projects" className="hover:text-white/80 transition-colors duration-300">Projects</a>
-              <a href="#clients" className="hover:text-white/80 transition-colors duration-300">Our Clients</a>
-              <a href="#contact" className="hover:text-white/80 transition-colors duration-300">Contact Us</a>
+              <Link href="/" className="hover:text-white/80 transition-colors duration-300">Home</Link>
+              <Link href="/about-us" className="hover:text-white/80 transition-colors duration-300">About Us</Link>
+              <Link href="#projects" className="hover:text-white/80 transition-colors duration-300">Projects</Link>
+              <Link href="#clients" className="hover:text-white/80 transition-colors duration-300">Our Clients</Link>
+              <Link href="#contact" className="hover:text-white/80 transition-colors duration-300">Contact Us</Link>
             </nav>
           </div>
 

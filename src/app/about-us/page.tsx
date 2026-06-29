@@ -1,15 +1,21 @@
 import Image from "next/image";
-import Navbar from "../components/Navbar";
-import AboutSection from "../components/AboutSection";
-import ProjectsSection from "../components/ProjectsSection";
-import ClientsSection from "../components/ClientsSection";
-import ReachOutSection from "../components/ReachOutSection";
-import Footer from "../components/Footer";
-import { getHomepageData } from "../lib/wordpress";
+import Navbar from "../../components/Navbar";
+import AboutSection from "../../components/AboutSection";
+import DesignSection from "../../components/DesignSection";
+import WhoWeAreSection from "../../components/WhoWeAreSection";
+import CertificationsSection from "../../components/CertificationsSection";
+import ReachOutSection from "../../components/ReachOutSection";
+import Footer from "../../components/Footer";
+import { getAboutPageData, getHomepageData } from "../../lib/wordpress";
 
-export default async function Home() {
-  const wpData = await getHomepageData();
-  const { hero, about, projects, clients, reachOut } = wpData;
+export default async function AboutUsPage() {
+  const [aboutData, homepageData] = await Promise.all([
+    getAboutPageData(),
+    getHomepageData(),
+  ]);
+
+  const { hero, about, designSection, whoWeAre, certificationsSection } = aboutData;
+  const { reachOut } = homepageData;
 
   return (
     <div className="relative w-full min-h-screen bg-[#7C8C70]">
@@ -25,7 +31,7 @@ export default async function Home() {
           <div className="absolute inset-0 select-none">
             <Image
               src={hero.backgroundImage}
-              alt="Spaces that speak for the brand"
+              alt="Vision that drives the craft"
               fill
               priority
               unoptimized
@@ -39,12 +45,12 @@ export default async function Home() {
           <div className="absolute inset-0 flex flex-col items-center justify-center text-white z-10 px-4 select-none">
             <div className="flex flex-col items-center text-center">
               
-              {/* SPACES */}
+              {/* VISION */}
               <h1 className="font-ivymode font-normal text-[4.5rem] sm:text-[6.5rem] md:text-[8rem] lg:text-[9.5rem] xl:text-[11rem] tracking-normal leading-[0.9] drop-shadow-[0_4px_12px_rgba(0,0,0,0.6)]">
                 {hero.title}
               </h1>
 
-              {/* Enclosed THAT SPEAK FOR THE */}
+              {/* Enclosed THAT DRIVES THE */}
               <div className="flex flex-col items-center w-full my-2 md:my-4 max-w-[260px] sm:max-w-xs md:max-w-md lg:max-w-lg xl:max-w-xl">
                 {/* Top Line */}
                 <div className="w-full h-[1px] bg-white/50" />
@@ -58,7 +64,7 @@ export default async function Home() {
                 <div className="w-full h-[1px] bg-white/50" />
               </div>
 
-              {/* BRAND */}
+              {/* CRAFT */}
               <h2 className="font-ivymode font-normal text-[4rem] sm:text-[6rem] md:text-[7.5rem] lg:text-[9rem] xl:text-[10.5rem] tracking-tight group-hover:tracking-[0.22em] group-hover:mr-[-0.22em] transition-[letter-spacing,margin] duration-[1500ms] ease-out leading-[0.9] drop-shadow-[0_4px_12px_rgba(0,0,0,0.6)]">
                 {hero.subtitle}
               </h2>
@@ -78,11 +84,17 @@ export default async function Home() {
       {/* Section 2: About Section */}
       <AboutSection data={about} />
 
-      {/* Section 3: Projects Section */}
-      <ProjectsSection data={projects} />
+      {/* Shared Gradient Wrapper for Design and Who We Are */}
+      <div className="relative w-full bg-gradient-to-b from-[#7C8C70] via-[#523225] to-[#AC8872]">
+        {/* Section 3: Design Section */}
+        <DesignSection data={designSection} />
 
-      {/* Section 4: Our Clients Section */}
-      <ClientsSection data={clients} />
+        {/* Section 4: Who We Are Section */}
+        <WhoWeAreSection data={whoWeAre} />
+      </div>
+
+      {/* Section 4.5: Certifications Section */}
+      <CertificationsSection data={certificationsSection} />
 
       {/* Section 5: Reach Out Section */}
       <ReachOutSection data={reachOut} />

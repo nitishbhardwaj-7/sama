@@ -1,6 +1,11 @@
 import Image from "next/image";
 
-export default function AboutSection() {
+export default function AboutSection({ data }: { data?: { sectionName: string; title: string; description: string; image: string } }) {
+  const sectionName = data?.sectionName || "about us";
+  const title = data?.title || "SAMA";
+  const description = data?.description || "SAMA Production is a multidisciplinary design and build studio known for crafting refined, high-impact environments across interiors, exhibitions, and brand activations. Defined by precision, material sophistication, and architectural clarity, each project is meticulously executed to embody brand identity at the highest level.";
+  const image = data?.image || "/uploads/2026/05/about_us_video.png";
+
   return (
     <section className="relative w-full min-h-screen bg-[#7C8C70] p-6 sm:p-10 md:p-14 lg:p-16 flex items-center justify-center overflow-hidden">
       <div className="w-full max-w-[92%] sm:max-w-[88%] md:max-w-[60%] mx-auto flex flex-col md:flex-row items-center justify-center gap-8 md:gap-0 py-12">
@@ -11,13 +16,13 @@ export default function AboutSection() {
           {/* Rotated Vertical Label */}
           <div className="h-28 sm:h-36 flex items-end justify-start select-none mb-6 relative pl-[1px]">
             <span className="font-ivymode text-xs sm:text-sm tracking-[0.35em] text-[#E5D9C4]/70 uppercase rotate-[-90deg] origin-bottom-left translate-x-[4px] -translate-y-[10px] whitespace-nowrap block">
-              about us
+              {sectionName}
             </span>
           </div>
 
           {/* SAMA Heading - overlaps the right image with z-20 */}
           <h2 className="font-ivymode font-normal text-[5.5rem] sm:text-[7.5rem] md:text-[9rem] lg:text-[10.5rem] xl:text-[12.5rem] text-[#E5D9C4] leading-[0.8] select-none z-20 whitespace-nowrap drop-shadow-[0_2px_10px_rgba(0,0,0,0.1)] mb-6 sm:mb-8">
-            SAMA
+            {title}
           </h2>
 
           {/* Left Vertical Divider Line */}
@@ -25,7 +30,7 @@ export default function AboutSection() {
 
           {/* Paragraph block */}
           <p className="font-ivymode text-sm sm:text-base text-[#F3F3F3] leading-relaxed tracking-wide max-w-md md:max-w-lg mb-8 sm:mb-10">
-            SAMA Production is a multidisciplinary design and build studio known for crafting refined, high-impact environments across interiors, exhibitions, and brand activations. Defined by precision, material sophistication, and architectural clarity, each project is meticulously executed to embody brand identity at the highest level.
+            {description}
           </p>
 
           {/* Know More Button */}
@@ -62,7 +67,7 @@ export default function AboutSection() {
         <div className="w-full md:w-[50%] flex justify-center z-0 relative">
           <div className="relative w-full aspect-[2/3] sm:aspect-square md:aspect-[2/3] max-w-sm md:max-w-none overflow-hidden rounded-[2.5rem] sm:rounded-[3.5rem] md:rounded-[4.5rem] shadow-[0_30px_60px_rgba(0,0,0,0.3)] bg-[#2b2a22]">
             <Image
-              src="/uploads/2026/05/about_us_video.png"
+              src={image}
               alt="SAMA Production Design Concept"
               fill
               priority

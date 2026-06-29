@@ -2,7 +2,21 @@
 
 import Image from "next/image";
 
-export default function ReachOutSection() {
+interface ReachOutSectionProps {
+  data?: {
+    title: string;
+    image: string;
+    phone: string;
+    phoneRaw: string;
+  };
+}
+
+export default function ReachOutSection({ data }: ReachOutSectionProps) {
+  const title = data?.title || "Reach Out";
+  const image = data?.image || "/uploads/2026/05/vertical-shot-dining-set-featuring-modern-chairs-a-2026-01-22-02-31-15-utc_1-1.png";
+  const phone = data?.phone || "+971 4 320 0416";
+  const phoneRaw = data?.phoneRaw || "+97143200416";
+
   return (
     <section className="relative w-full bg-white py-16 sm:py-24 px-6 sm:px-10 md:px-14 lg:px-16 flex flex-col items-center justify-center overflow-hidden">
       <div className="w-full max-w-[92%] sm:max-w-[88%] md:max-w-[75%] mx-auto flex flex-col md:flex-row items-center md:items-start justify-center gap-12 md:gap-20 z-10">
@@ -11,7 +25,7 @@ export default function ReachOutSection() {
         <div className="w-full md:w-[35%] flex justify-center">
           <div className="relative w-full max-w-[280px] aspect-[1/2] overflow-hidden rounded-2xl shadow-[0_15px_40px_rgba(0,0,0,0.15)] bg-[#2b2a22]">
             <Image
-              src="/uploads/2026/05/vertical-shot-dining-set-featuring-modern-chairs-a-2026-01-22-02-31-15-utc_1-1.png"
+              src={image}
               alt="Reach Out Corridor"
               fill
               priority
@@ -26,7 +40,7 @@ export default function ReachOutSection() {
         <div className="w-full md:w-[65%] flex flex-col items-start gap-8">
           {/* Headline */}
           <h2 className="font-ivymode font-normal text-4xl sm:text-5xl md:text-6xl text-[#563320] leading-tight select-none">
-            Reach Out
+            {title}
           </h2>
 
           {/* Form */}
@@ -80,7 +94,7 @@ export default function ReachOutSection() {
 
             {/* Phone */}
             <a 
-              href="tel:+97143200416"
+              href={`tel:${phoneRaw}`}
               className="flex items-center gap-3 font-ivymode text-lg sm:text-xl text-[#563320] hover:text-[#856555] transition-colors duration-300 mt-2"
             >
               <svg 
@@ -96,7 +110,7 @@ export default function ReachOutSection() {
               >
                 <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z" />
               </svg>
-              <span>+971 4 320 0416</span>
+              <span>{phone}</span>
             </a>
           </div>
 

@@ -2,13 +2,14 @@
 
 import { useState } from "react";
 import Image from "next/image";
+import Link from "next/link";
 
 export default function Navbar() {
   const [isOpen, setIsOpen] = useState(false);
 
   const navLinks = [
     { name: "Home", href: "/" },
-    { name: "About Us", href: "#about" },
+    { name: "About Us", href: "/about-us" },
     { name: "Projects", href: "#projects" },
     { name: "Our Clients", href: "#clients" },
     { name: "Contact Us", href: "#contact" },
@@ -20,7 +21,7 @@ export default function Navbar() {
         <div className="w-full max-w-[92%] sm:max-w-[88%] md:max-w-[80%] mx-auto py-6 sm:py-8 flex items-center justify-between">
           
           {/* Logo */}
-          <a href="/" className="relative w-28 h-10 sm:w-32 sm:h-12 select-none">
+          <Link href="/" className="relative w-28 h-10 sm:w-32 sm:h-12 select-none">
             <Image
               src="/uploads/2026/02/sama-logo.png"
               alt="SAMA Production"
@@ -29,7 +30,7 @@ export default function Navbar() {
               unoptimized
               className="object-contain object-left"
             />
-          </a>
+          </Link>
 
           {/* Right Area: Tagline & Hamburger */}
           <div className="flex items-center gap-6 sm:gap-8">
@@ -90,13 +91,13 @@ export default function Navbar() {
           
           {navLinks.map((link) => (
             <div key={link.name} className="w-full flex flex-col">
-              <a
+              <Link
                 href={link.href}
                 onClick={() => setIsOpen(false)}
                 className="block py-4 sm:py-5 font-ivymode text-2xl sm:text-3xl text-right text-white hover:text-white/70 transition-colors duration-300 tracking-wider"
               >
                 {link.name}
-              </a>
+              </Link>
               <div className="w-[75%] h-[1px] bg-white/20 ml-auto" />
             </div>
           ))}
